@@ -38,7 +38,7 @@ class ExercisesController {
         return res.status(400).json({ error: message.DURATION_REQUIRED });
       }
 
-      if (duration <= 0 || duration != typeof number) {
+      if (duration <= 0 || isNaN(duration)) {
         return res.status(400).json({
           error: message.DURATION_MUST_BE_POSITIVE_NUMBER,
         });
