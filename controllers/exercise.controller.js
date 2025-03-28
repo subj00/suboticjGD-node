@@ -128,12 +128,8 @@ class ExercisesController {
         if (err) {
           return res.status(500).json({ error: err.message });
         }
-        db.get(query.COUNT_EXERCISES_BY_USER_ID, [userId], (err, result) => {
-          if (err) {
-            return res.status(500).json({ error: err.message });
-          }
-          res.json({ userId, logs: rows, count: result.count });
-        });
+        let count = rows?.length;
+        res.json({ userId, logs: rows, count: count });
       });
     });
   };
