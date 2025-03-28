@@ -7,8 +7,27 @@ class ExercisesController {
     const userId = req._id;
 
     const isValidDate = (dateString) => {
-      const date = new Date(dateString);
-      return !isNaN(date.getTime());
+      const regex = /^\d{4}-\d{2}-\d{2}$/;
+      if (!dateString.match(regex)) return false;
+      const parts = dateString.split("-");
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);
+      const day = parseInt(parts[2], 10);
+
+      if (month < 1 || month > 12) return false;
+      if (day < 1 || day > 31) return false;
+
+      const monthLengths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+      if (month === 2) {
+        const isLeap = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+        if (isLeap && day > 29) return false;
+        if (!isLeap && day > 28) return false;
+      } else {
+        if (day > monthLengths[month - 1]) return false;
+      }
+
+      return true;
     };
 
     const { description, duration, date } = req.body;
