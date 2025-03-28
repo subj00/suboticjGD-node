@@ -13,12 +13,6 @@ class ExercisesController {
         return res.status(500).json({ error: err.message });
       }
 
-      if (!row) {
-        return res.status(400).json({
-          error: message.USER_NOT_FOUND,
-        });
-      }
-
       if (!description && !duration) {
         return res
           .status(400)
