@@ -6,6 +6,11 @@ class ExercisesController {
   createExerciseForUser = (req, res) => {
     const userId = req._id;
 
+    const isValidDate = (dateString) => {
+      const date = new Date(dateString);
+      return !isNaN(date.getTime());
+    };
+
     const { description, duration, date } = req.body;
 
     db.get(query.SELECT_BY_USER_ID, [userId], (err, row) => {
@@ -16,6 +21,12 @@ class ExercisesController {
       if (!row) {
         return res.status(400).json({
           error: message.USER_NOT_FOUND,
+        });
+      }
+
+      if (duration <= 0) {
+        return res.status(400).json({
+          error: message.DURATION_MUST_BE_POSITIVE_NUMBER,
         });
       }
 
@@ -34,6 +45,10 @@ class ExercisesController {
       }
 
       const exerciseDate = date || new Date().toISOString().slice(0, 10);
+
+      if (!isValidDate(exerciseDate)) {
+        return res.status(400).json({ error: message.INVALID_DATE });
+      }
 
       db.run(
         query.INSERT_INTO_EXERCISES,
@@ -83,7 +98,7 @@ class ExercisesController {
         params.push(to);
       }
 
-      newQuery += " ORDER BY date DESC";
+      newQuery += " ORDER BY date ASC";
 
       if (limit) {
         newQuery += " LIMIT ?";
