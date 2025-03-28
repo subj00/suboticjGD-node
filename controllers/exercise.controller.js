@@ -24,12 +24,6 @@ class ExercisesController {
         });
       }
 
-      if (duration <= 0) {
-        return res.status(400).json({
-          error: message.DURATION_MUST_BE_POSITIVE_NUMBER,
-        });
-      }
-
       if (!description && !duration) {
         return res
           .status(400)
@@ -42,6 +36,12 @@ class ExercisesController {
 
       if (!duration) {
         return res.status(400).json({ error: message.DURATION_REQUIRED });
+      }
+
+      if (duration <= 0 || duration != typeof number) {
+        return res.status(400).json({
+          error: message.DURATION_MUST_BE_POSITIVE_NUMBER,
+        });
       }
 
       const exerciseDate = date || new Date().toISOString().slice(0, 10);
