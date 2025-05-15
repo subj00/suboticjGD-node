@@ -13,6 +13,8 @@ const SELECT_USER_BY_USERNAME = "SELECT * FROM users WHERE username = ?";
 const COUNT_EXERCISES_BY_USER_ID =
   "SELECT COUNT(*) as count FROM exercises WHERE userId = ?";
 
+const INSERT_INTO_USERS = "INSERT INTO users (username) VALUES (?)";
+
 const INSERT_INTO_EXERCISES =
   "INSERT INTO exercises (userId, description, duration, date) VALUES (?, ?, ?, ?)";
 

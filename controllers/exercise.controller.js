@@ -1,6 +1,6 @@
 const query = require("../constants/query.contants");
 const message = require("../constants/message.constants");
-const db = require("../database.");
+const db = require("../database");
 
 class ExercisesController {
   createExerciseForUser = (req, res) => {

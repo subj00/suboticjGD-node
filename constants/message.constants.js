@@ -4,6 +4,8 @@ const DATABASE_CONNECTION_ERROR = "Error while connecting to the database";
 
 const CREATE_TABLE_USERS_ERROR = "Error while creating table users";
 
+const CREATE_TABLE_EXERCISES_ERROR = "Error while creating table exercises";
+
 const USER_NOT_FOUND = "User with the given ID does not exist";
 
 const USERNAME_REQUIRED = "Username is required";
